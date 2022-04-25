@@ -1,7 +1,7 @@
 package com.example.notesss.database
 
-import android.arch.persistence.room.*
 import androidx.lifecycle.LiveData
+import androidx.room.*
 import com.example.notesss.model.Note
 
 @Dao

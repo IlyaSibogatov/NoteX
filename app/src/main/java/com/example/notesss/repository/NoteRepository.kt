@@ -1,6 +1,5 @@
 package com.example.notesss.repository
 
-import android.arch.persistence.room.Query
 import com.example.notesss.database.NoteDatabase
 import com.example.notesss.model.Note
 

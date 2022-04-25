@@ -1,9 +1,9 @@
 package com.example.notesss.database
 
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.Room
-import android.arch.persistence.room.RoomDatabase
 import android.content.Context
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
 import com.example.notesss.model.Note
 
 @Database(
@@ -11,7 +11,7 @@ import com.example.notesss.model.Note
     version = 1,
     exportSchema = false
 )
-abstract class NoteDatabase:RoomDatabase() {
+abstract class NoteDatabase: RoomDatabase() {
 
     abstract fun getNoteDao():DAO
 
