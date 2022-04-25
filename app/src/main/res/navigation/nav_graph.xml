@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/noteFragment">
+
+    <fragment
+        android:id="@+id/noteFragment"
+        android:name="com.example.notesss.fragments.NoteFragment"
+        android:label="fragment_note"
+        tools:layout="@layout/fragment_note">
+        <action
+            android:id="@+id/action_noteFragment_to_saveNoteFragment"
+            app:destination="@id/saveNoteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/saveNoteFragment"
+        android:name="com.example.notesss.fragments.SaveNoteFragment"
+        android:label="fragment_save_note"
+        tools:layout="@layout/fragment_save_note">
+        <action
+            android:id="@+id/action_saveNoteFragment_to_noteFragment"
+            app:destination="@id/noteFragment" />
+
+        <argument
+            android:name="Note"
+            android:defaultValue="@null"
+            app:argType="com.example.notesss.model.Note"
+            app:nullable="true" />
+    </fragment>
+</navigation>
