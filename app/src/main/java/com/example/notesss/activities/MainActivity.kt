@@ -1,8 +1,8 @@
 package com.example.notesss.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.notesss.database.NoteDatabase
 import com.example.notesss.databinding.ActivityMainBinding
@@ -14,11 +14,12 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: ViewModel
     private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
+
         try{
             val repository = NoteRepository(NoteDatabase(this))
             val viewModelFactory = ViewModelFactory(repository)

@@ -87,11 +87,9 @@
             android:layout_height="match_parent"
             android:id="@+id/rvNote"
             android:paddingStart="10dp"
-            android:clipToPadding="false"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:paddingBottom="5dp"
             android:transitionGroup="true"
-            tools:listitem="@layout/note_item">
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
 
         </androidx.recyclerview.widget.RecyclerView>
 
