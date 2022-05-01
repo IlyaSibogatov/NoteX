@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/noteFragment">
+    app:startDestination="@id/homeScreen">
 
     <fragment
-        android:id="@+id/noteFragment"
-        android:name="com.example.notesss.fragments.NoteFragment"
+        android:id="@+id/homeScreen"
+        android:name="com.example.notesss.homescreen.HomeScreenFragment"
         android:label="fragment_note"
         tools:layout="@layout/fragment_note">
         <action
@@ -16,17 +16,17 @@
     </fragment>
     <fragment
         android:id="@+id/saveNoteFragment"
-        android:name="com.example.notesss.fragments.SaveNoteFragment"
+        android:name="com.example.notesss.savenotescreen.SaveNoteFragment"
         android:label="fragment_save_note"
         tools:layout="@layout/fragment_save_note">
         <action
             android:id="@+id/action_saveNoteFragment_to_noteFragment"
-            app:destination="@id/noteFragment" />
+            app:destination="@id/homeScreen" />
 
         <argument
             android:name="Note"
             android:defaultValue="@null"
-            app:argType="com.example.notesss.model.Note"
+            app:argType="com.example.notesss.database.Note"
             app:nullable="true" />
     </fragment>
 </navigation>

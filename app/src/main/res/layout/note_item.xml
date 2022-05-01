@@ -7,7 +7,7 @@
 
     </data>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp">
@@ -30,19 +30,19 @@
                 android:padding="5dp">
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:id="@+id/noteItemTitle"
+                    android:layout_width="372dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="4dp"
-                    android:padding="5dp"
                     android:ellipsize="end"
+                    android:padding="5dp"
                     android:text="This is a title"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
+                    android:textAlignment="textStart"
                     android:textColor="@color/black"
-                    android:textAlignment="textStart">
+                    android:textSize="16sp"
+                    android:textStyle="bold">
 
                 </com.google.android.material.textview.MaterialTextView>
 
@@ -64,9 +64,10 @@
 
                 </TextView>
 
+
             </RelativeLayout>
 
         </com.google.android.material.card.MaterialCardView>
 
-    </RelativeLayout>
+    </LinearLayout>
 </layout>

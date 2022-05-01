@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+
+    <group android:id="@+id/groupSort">
+        <item
+            android:id="@+id/sortedById"
+            android:title="sort by id"
+            app:showAsAction="never" />
+        <item
+            android:id="@+id/sortedByABC"
+            android:title="sort bi ABC"
+            app:showAsAction="never" />
+    </group>
+
+</menu>
