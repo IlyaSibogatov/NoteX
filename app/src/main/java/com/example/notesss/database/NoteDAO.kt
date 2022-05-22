@@ -9,17 +9,17 @@ interface NoteDAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addNote(note: Note)
 
-    @Update
-    suspend fun updateNote(note: Note)
-
-    @Query("SELECT * FROM note")
-    fun getAllNote(): LiveData<List<Note>>
-
-    @Query("SELECT * FROM Note ORDER BY id ASC")
+    @Query("SELECT * FROM note ORDER BY id ASC")
     fun sortByOldId(): LiveData<List<Note>>
 
+    @Query("SELECT * FROM note ORDER BY id DESC")
+    fun sortByNewId(): LiveData<List<Note>>
+
+    @Query("SELECT * FROM Note ORDER BY title ASC")
+    fun sortByTitleAsc(): LiveData<List<Note>>
+
     @Query("SELECT * FROM Note ORDER BY title DESC")
-    fun sortByTitle(): LiveData<List<Note>>
+    fun sortByTitleDesc(): LiveData<List<Note>>
 
     @Query("SELECT * FROM Note WHERE title LIKE :query OR content LIKE :query")
     fun searchNote(query: String): LiveData<List<Note>>
@@ -29,4 +29,7 @@ interface NoteDAO {
 
     @Delete
     suspend fun deleteNote(note: Note)
+
+    @Update
+    suspend fun updateNote(note: Note)
 }

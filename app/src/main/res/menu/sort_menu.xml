@@ -4,15 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
 
-    <group android:id="@+id/groupSort">
         <item
-            android:id="@+id/sortedById"
-            android:title="sort by id"
+            android:id="@+id/new_id_first"
+            android:title="new if first"
             app:showAsAction="never" />
         <item
-            android:id="@+id/sortedByABC"
-            android:title="sort bi ABC"
+            android:id="@+id/old_id_first"
+            android:title="old id first"
             app:showAsAction="never" />
-    </group>
+        <item
+            android:id="@+id/a_z_title"
+            android:title="title by A-Z"
+            app:showAsAction="never" />
+        <item
+            android:id="@+id/z_a_title"
+            android:title="title Z-A"
+            app:showAsAction="never" />
+        <item
+            android:id="@+id/clear_list"
+            android:title="clear list"
+            app:showAsAction="never" />
 
 </menu>

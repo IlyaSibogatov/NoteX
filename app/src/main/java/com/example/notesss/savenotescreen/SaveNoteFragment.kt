@@ -35,13 +35,12 @@ class SaveNoteFragment : Fragment(R.layout.fragment_save_note) {
         initViewModel()
 
         binding.apply {
-
-            bckBtn.setOnClickListener {
+            binding.bckBtn.setOnClickListener {
                 requireView().hideKeyboard()
                 controller.popBackStack()
             }
 
-            saveNote.setOnClickListener {
+            binding.saveNote.setOnClickListener {
                 noteViewModel.saveNote(
                     Note(
                         0,

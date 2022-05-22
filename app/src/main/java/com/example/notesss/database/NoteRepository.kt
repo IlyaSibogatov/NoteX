@@ -2,9 +2,11 @@ package com.example.notesss.database
 
 class NoteRepository(private val noteDao: NoteDAO) {
 
-    fun getAllNote() = noteDao.getAllNote()
+    fun getAllNote() = noteDao.sortByNewId()
     fun sortByOldId() = noteDao.sortByOldId()
-    fun sortByTitle() = noteDao.sortByTitle()
+    fun sortByNewId() = noteDao.sortByNewId()
+    fun sortByTitleAsc() = noteDao.sortByTitleAsc()
+    fun sortByTitleDesc() = noteDao.sortByTitleDesc()
     fun removeAllNote() = noteDao.removeAllNote()
     fun searchNote(query: String) = noteDao.searchNote(query)
     suspend fun addNote(note: Note) = noteDao.addNote(note)
