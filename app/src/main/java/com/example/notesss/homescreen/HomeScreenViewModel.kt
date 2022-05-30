@@ -1,4 +1,4 @@
-package com.example.notesss.viewModel
+package com.example.notesss.homescreen
 
 import androidx.lifecycle.*
 import com.example.notesss.database.Note
@@ -14,7 +14,7 @@ enum class NoteSortOrder {
     DESC_TITLE
 }
 
-class NoteViewModel(private val repository: NoteRepository) : ViewModel() {
+class HomeScreenNoteViewModel(private val repository: NoteRepository) : ViewModel() {
 
     private val sortOrderLiveData = MutableLiveData(NoteSortOrder.NONE)
 
@@ -32,19 +32,11 @@ class NoteViewModel(private val repository: NoteRepository) : ViewModel() {
         }
     }
 
-    fun saveNote(note: Note) = viewModelScope.launch(Dispatchers.IO) {
-        repository.addNote(note)
-    }
-
     fun removeAllNote() = viewModelScope.launch(Dispatchers.IO) {
         repository.removeAllNote()
     }
 
     fun searchNote(query: String) = repository.searchNote(query)
-
-    fun updateNote(note: Note) = viewModelScope.launch(Dispatchers.IO) {
-        repository.updateNote(note)
-    }
 
     fun deleteNote(note: Note) = viewModelScope.launch(Dispatchers.IO) {
         repository.deleteNote(note)

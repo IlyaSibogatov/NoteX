@@ -10,21 +10,15 @@ import com.example.notesss.R
 import com.example.notesss.database.Note
 import com.example.notesss.databinding.FragmentSaveNoteBinding
 import com.example.notesss.utils.hideKeyboard
-import com.example.notesss.viewModel.NoteViewModel
-import com.example.notesss.viewModel.ViewModelFactory
 
 class SaveNoteFragment : Fragment(R.layout.fragment_save_note) {
 
+    private lateinit var viewModel: SaveNoteViewModel
     private lateinit var controller: NavController
+
     private var _binding: FragmentSaveNoteBinding? = null
     private val binding
         get() = _binding!!
-    private lateinit var noteViewModel: NoteViewModel
-
-    private fun initViewModel() {
-        val viewModelFactory = ViewModelFactory()
-        noteViewModel = ViewModelProvider(this, viewModelFactory)[NoteViewModel::class.java]
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -32,24 +26,38 @@ class SaveNoteFragment : Fragment(R.layout.fragment_save_note) {
         controller = Navigation.findNavController(view)
         _binding = FragmentSaveNoteBinding.bind(view)
 
-        initViewModel()
+        val id = arguments?.getLong(ARGUMENT_ID) ?: INVALID_ID
+        initViewModel(id)
 
         binding.apply {
-            binding.bckBtn.setOnClickListener {
+            bckBtn.setOnClickListener {
                 requireView().hideKeyboard()
                 controller.popBackStack()
             }
-
-            binding.saveNote.setOnClickListener {
-                noteViewModel.saveNote(
+            saveNote.setOnClickListener {
+                viewModel.updateOrSaveNote(
                     Note(
-                        0,
-                        binding.etTitle.text.toString(),
-                        binding.etNoteContent.text.toString()
+                        id,
+                        etTitle.text.toString(),
+                        etNoteContent.text.toString()
                     )
                 )
                 controller.popBackStack()
             }
         }
+        viewModel.currentNote.observe(viewLifecycleOwner) {
+            binding.etTitle.setText(it?.title)
+            binding.etNoteContent.setText(it?.content)
+        }
+    }
+
+    private fun initViewModel(id: Long) {
+        val viewModelFactory = SaveNoteViewModelFactory(id)
+        viewModel = ViewModelProvider(this, viewModelFactory)[SaveNoteViewModel::class.java]
+    }
+
+    companion object {
+        private const val ARGUMENT_ID = "ARGUMENT_ID"
+        private const val INVALID_ID = -1L
     }
 }

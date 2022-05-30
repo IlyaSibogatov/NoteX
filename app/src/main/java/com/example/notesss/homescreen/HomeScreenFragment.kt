@@ -13,33 +13,24 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.notesss.R
+import com.example.notesss.RecyclerViewAdapter.NotesListRecyclerDiffAdapter
 import com.example.notesss.database.Note
 import com.example.notesss.databinding.FragmentNoteBinding
 import com.example.notesss.utils.hideKeyboard
-import com.example.notesss.viewModel.NoteSortOrder
-import com.example.notesss.viewModel.NoteViewModel
-import com.example.notesss.viewModel.NotesListRecyclerDiffAdapter
-import com.example.notesss.viewModel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_note.*
 
 class HomeScreenFragment : Fragment(R.layout.fragment_note) {
 
+    private lateinit var rvAdapter: NotesListRecyclerDiffAdapter
+    private lateinit var viewModel: HomeScreenNoteViewModel
     private lateinit var controller: NavController
 
     private var _binding: FragmentNoteBinding? = null
     private val binding
         get() = _binding!!
 
-    private lateinit var rvAdapter: NotesListRecyclerDiffAdapter
-    private lateinit var noteViewModel: NoteViewModel
-
     val observer: (List<Note>) -> Unit = { rvAdapter.setList(it) }
     var notesLiveData: LiveData<List<Note>>? = null
-
-    private fun initViewModel() {
-        val viewModelFactory = ViewModelFactory()
-        noteViewModel = ViewModelProvider(this, viewModelFactory)[NoteViewModel::class.java]
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,9 +38,11 @@ class HomeScreenFragment : Fragment(R.layout.fragment_note) {
             layoutInflater,
             object : NotesListRecyclerDiffAdapter.NoteClickListener {
                 override fun onNoteClicked(note: Note) {
+                    val bundle = Bundle()
+                    bundle.putLong(ARGUMENT_ID, note.id)
                     controller.navigate(
-                        HomeScreenFragmentDirections
-                            .actionHomeScreenToSaveNoteFragment()
+                        R.id.action_homeScreen_to_saveNoteFragment,
+                        bundle
                     )
                 }
             })
@@ -76,7 +69,7 @@ class HomeScreenFragment : Fragment(R.layout.fragment_note) {
             search_btn.setOnClickListener {
                 requireView().hideKeyboard()
                 if (search.text.isNotEmpty()) {
-                    noteViewModel.searchNote(search.text.toString())
+                    viewModel.searchNote(search.text.toString())
                         .observe(viewLifecycleOwner, observer)
                 }
             }
@@ -95,7 +88,7 @@ class HomeScreenFragment : Fragment(R.layout.fragment_note) {
 
     private fun subscribeToNotes() {
         notesLiveData?.removeObserver(observer)
-        notesLiveData = noteViewModel.notes.also {
+        notesLiveData = viewModel.notes.also {
             it.observe(viewLifecycleOwner, observer)
         }
     }
@@ -105,6 +98,11 @@ class HomeScreenFragment : Fragment(R.layout.fragment_note) {
         _binding = null
     }
 
+    private fun initViewModel() {
+        val viewModelFactory = HomeScreenViewModelFactory()
+        viewModel = ViewModelProvider(this, viewModelFactory)[HomeScreenNoteViewModel::class.java]
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.sort_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
@@ -112,12 +110,16 @@ class HomeScreenFragment : Fragment(R.layout.fragment_note) {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.new_id_first -> noteViewModel.setSortOrder(NoteSortOrder.ASC_ID)
-            R.id.old_id_first -> noteViewModel.setSortOrder(NoteSortOrder.DESC_ID)
-            R.id.a_z_title -> noteViewModel.setSortOrder(NoteSortOrder.ASC_TITLE)
-            R.id.z_a_title -> noteViewModel.setSortOrder(NoteSortOrder.DESC_TITLE)
-            R.id.clear_list -> noteViewModel.removeAllNote()
+            R.id.new_id_first -> viewModel.setSortOrder(NoteSortOrder.ASC_ID)
+            R.id.old_id_first -> viewModel.setSortOrder(NoteSortOrder.DESC_ID)
+            R.id.a_z_title -> viewModel.setSortOrder(NoteSortOrder.ASC_TITLE)
+            R.id.z_a_title -> viewModel.setSortOrder(NoteSortOrder.DESC_TITLE)
+            R.id.clear_list -> viewModel.removeAllNote()
         }
         return true
+    }
+
+    companion object {
+        private const val ARGUMENT_ID = "ARGUMENT_ID"
     }
 }

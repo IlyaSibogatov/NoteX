@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp">
 
+
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -29,9 +30,16 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp">
 
+                <CheckBox
+                    android:id="@+id/checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible" />
+
                 <com.google.android.material.textview.MaterialTextView
+                    android:layout_toEndOf="@+id/checkbox"
                     android:id="@+id/noteItemTitle"
-                    android:layout_width="372dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="8dp"

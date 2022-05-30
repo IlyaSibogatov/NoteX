@@ -15,14 +15,17 @@ interface NoteDAO {
     @Query("SELECT * FROM note ORDER BY id DESC")
     fun sortByNewId(): LiveData<List<Note>>
 
-    @Query("SELECT * FROM Note ORDER BY title ASC")
+    @Query("SELECT * FROM note ORDER BY title ASC")
     fun sortByTitleAsc(): LiveData<List<Note>>
 
-    @Query("SELECT * FROM Note ORDER BY title DESC")
+    @Query("SELECT * FROM note ORDER BY title DESC")
     fun sortByTitleDesc(): LiveData<List<Note>>
 
-    @Query("SELECT * FROM Note WHERE title LIKE :query OR content LIKE :query")
+    @Query("SELECT * FROM note WHERE title LIKE :query OR content LIKE :query")
     fun searchNote(query: String): LiveData<List<Note>>
+
+    @Query("SELECT * FROM note WHERE id=:id")
+    fun getNoteById(id: Long): LiveData<Note?>
 
     @Query("DELETE FROM note")
     fun removeAllNote()

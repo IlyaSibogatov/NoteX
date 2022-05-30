@@ -3,26 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
-
+    <group android:id="@+id/sorting">
         <item
             android:id="@+id/new_id_first"
-            android:title="new if first"
+            android:title="new first"
             app:showAsAction="never" />
         <item
             android:id="@+id/old_id_first"
-            android:title="old id first"
+            android:title="old first"
             app:showAsAction="never" />
         <item
             android:id="@+id/a_z_title"
-            android:title="title by A-Z"
+            android:title="sort by A-Z"
             app:showAsAction="never" />
         <item
             android:id="@+id/z_a_title"
-            android:title="title Z-A"
+            android:title="sort by Z-A"
             app:showAsAction="never" />
+
+    </group>
+
+    <group android:id="@+id/delete">
         <item
             android:id="@+id/clear_list"
             android:title="clear list"
             app:showAsAction="never" />
-
+        <item
+            android:id="@+id/clear_checked"
+            android:title="delete selected"
+            app:showAsAction="never" />
+    </group>
 </menu>
